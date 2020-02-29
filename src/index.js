@@ -1,9 +1,8 @@
 const bot = require("./bot") 
 const DB = require("./connect_db")
 const bot_command = require("./bot_commands")
-
-const bodyParser= require('body-parser')
-const urlencodedParser = bodyParser.urlencoded({extended: false});
+const keyboard = require("./keyboard")
+const keyboard_text = require("./keyboard_text")
  
 bot_command()
 
