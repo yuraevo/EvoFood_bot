@@ -1,26 +1,22 @@
 module.exports = {
     main: {
-        personal_accaunt: "\uD83D\uDCF1 Мой кабинет",
-        menu: "\uD83D\uDCD3 Меню",
-        basket: "\uD83D\uDCD7 Мои заказы",
-        home_delivery: "\uD83D\uDCD3 Доставка на дом",
-        reserve_table: "\u23F2 Забронировать стол",
-        //call_staff: "\uD83D\uDCDE Вызов персонала",
-        review: "\uD83D\uDCE7 Написать отзыв",
-        about: "\uD83C\uDFDB О заведении",
-        inviting_friends: "\uD83D\uDC71 Пригласи друзей и получи бонусы"
+        personal_accaunt: "\uD83D\uDCF1 My cabinet",
+        menu: "\uD83D\uDCD3 Menu",
+        basket: "\uD83D\uDCD7 My orders",
+        home_delivery: "\uD83D\uDCD3 Delivery",
+        reserve_table: "\u23F2 Reserve a table",
+        review: "\uD83D\uDCE7 Write review",
+        about: "\uD83C\uDFDB About us",
+        inviting_friends: "\uD83D\uDC71 Invite your friends and get a bonus"
     },
 
-    back: "\uD83D\uDD19 Назад",
+    back: "\uD83D\uDD19 Back",
 
-    back_in_menu: "\uD83D\uDD19 Вернуться в меню",
+    back_in_menu: "\uD83D\uDD19 Back in menu",
 
     personal_accaunt: {
-        card: "\uD83D\uDCB3 Личная карта",
-        change_phone: "\uD83D\uDCDEИзм. номер",
-        change_adres: "\uD83D\uDDFAИзм. адрес",
-        change_date_of_birthday: "\uD83D\uDCC5Изменить дату рождения",
-        bonus: "\uD83C\uDF81 О бонусах",
+        card: "\uD83D\uDCB3 Personal card",
+        bonus: "\uD83C\uDF81 About bonuses",
     },
 
     card: {
