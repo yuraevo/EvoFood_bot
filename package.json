@@ -1,0 +1,17 @@
+{
+  "name": "bot_diplom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "alert-node": "^2.1.4",
+    "body-parser": "^1.19.0",
+    "node-telegram-bot-api": "^0.40.0",
+    "pg": "^7.18.1"
+  }
+}
