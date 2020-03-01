@@ -27,11 +27,10 @@ async function findUser(id, first_name, last_name, username) {
                 reply_markup: {
                     inline_keyboard:
                     [
-                        [{ text: "Ukraine", callback_data: "1" }]
+                        [{ text: "Ukraine", callback_data: "Ukraine-Odessa" }]
                     ]
                 }
             });
-
             //registration.userRegistration(id, first_name, last_name,)
         }
     }
