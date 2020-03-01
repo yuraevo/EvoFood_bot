@@ -1,6 +1,6 @@
 module.exports = {
     main: {
-        personal_accaunt: "\uD83D\uDCF1 My cabinet",
+        personal_accaunt: "\uD83D\uDCF1My cabinet",
         menu: "\uD83D\uDCD3 Menu",
         basket: "\uD83D\uDCD7 My orders",
         home_delivery: "\uD83D\uDCD3 Delivery",
