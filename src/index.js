@@ -7,18 +7,16 @@ const func = require("./functions/findUser")
 bot_command()
 
 bot.on("message", msg => {
-
     const { id } = msg.chat
     const { username } = msg.chat
     const { first_name } = msg.chat
     const { last_name } = msg.chat
-
-    console.log("зашло")
+    console.log("Зашло")
     switch(msg.text) {
         case keyboard_text.main.personal_accaunt:
             console.log("Пользователь " + username + " заходит в личный аккаунт")
             func.findUser(id, first_name, last_name, username)
-        break    
+        break
         case keyboard_text.back:
             console.log("Пользователь " + username + " заходит в общее меню")
             bot.sendMessage(id, "Вы вернулись в меню", {
@@ -28,5 +26,10 @@ bot.on("message", msg => {
                 }
             })
         break 
+        case "Ukraine-Odessa":
+            console.log(username + "Выбрал Украина-Одесса")
+        break
+        
+            
     }
 })
