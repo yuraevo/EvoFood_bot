@@ -27,7 +27,7 @@ async function findUser(id, first_name, last_name, username) {
                 reply_markup: {
                     inline_keyboard:
                     [
-                        [{ text: "Ukraine", callback_data: "Ukraine-Odessa" }]
+                        [{ text: "Ukraine", callback_data: "Ukraine_Odessa" }]
                     ]
                 }
             });
