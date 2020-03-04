@@ -11,7 +11,7 @@ bot.on("message", msg => {
     const { username } = msg.chat
     const { first_name } = msg.chat
     const { last_name } = msg.chat
-    
+
     console.log("Зашло")
     switch(msg.text) {
         case keyboard_text.main.personal_accaunt:
@@ -26,20 +26,18 @@ bot.on("message", msg => {
                     keyboard: keyboards.main
                 }
             })
-        break 
-        case "Ukraine_Odessa":
-            bot.sendMessage(id, "Вы выбрали Украину!", {})
-            console.log(username + "Выбрал Украина-Одесса")
-        break
-        
-            
+        break       
     }
     bot.on("callback_query", query => {
-        const {chat, id, text} = query.message
+        const { chat, id, text } = query.message
+        const { id } = query.message.chat
+        const { data } = query
+        console.log(data)
+        //вставить вызов метода choiceAdress()
         switch(query.data) {
             case "Ukraine_Odessa":
                 bot.sendMessage(query.message.chat.id, "Вы выбрали Украину!", {})
-                console.log(username + "Выбрал Украина-Одесса")
+                //console.log(username + "Выбрал Украина-Одесса")
             break
         }
     })
