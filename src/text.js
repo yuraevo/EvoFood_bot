@@ -18,6 +18,8 @@
 // module.exports = Text
 
 module.exports = {
-    choiseCountry: `
-<strong>Choise please country</strong>`
+choiseCountry: 
+`
+<strong>Choise please country</strong>
+`
 }
