@@ -26,7 +26,7 @@ async function findUser(id, first_name, last_name, username, bot) {
                 reply_markup: {
                     inline_keyboard:
                     [
-                        [{ text: "Odessa\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Odessa" }]
+                        [{ text: "Ukraine\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Ukraine" }]
                     ]
                 }
             });
