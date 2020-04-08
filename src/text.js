@@ -20,6 +20,11 @@
 module.exports = {
 choiseCountry: 
 `
-<strong>Choise please country</strong>
+<strong>Пожалуйста, выберите страну: </strong>
+`,
+choiceCity:
 `
+<strong>Пожалуйста, выберите город: </strong>
+`
+
 }
