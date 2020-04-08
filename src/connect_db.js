@@ -1,4 +1,3 @@
-const { Client } = require('pg');
 const SEQURITY_INFORMATION = require("./token")
 
 const client = {
