@@ -34,10 +34,10 @@ bot.on("message", msg => {
 })
 
 bot.on("callback_query", query => {
-    bot.answerCallbackQuery(query.id, "Вы выбрали город")
+    //bot.answerCallbackQuery(query.id, "Вы выбрали горо")
     const { id } = query.message.chat
     const { data } = query
     const { username } = query.message.chat
     console.log(data)
-    adress.choiceAdress(id, data, username, bot)
+    adress.choiceAdress(id, data, username, bot, query)
 })
