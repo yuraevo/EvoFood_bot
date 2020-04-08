@@ -1,45 +1,45 @@
 module.exports = {
     main: {
-        personal_accaunt: "\uD83D\uDCF1My cabinet",
-        menu: "\uD83D\uDCD3 Menu",
-        basket: "\uD83D\uDCD7 My orders",
-        home_delivery: "\uD83D\uDCD3 Delivery",
-        reserve_table: "\u23F2 Reserve a table",
-        review: "\uD83D\uDCE7 Write review",
-        about: "\uD83C\uDFDB About us",
-        inviting_friends: "\uD83D\uDC71 Invite your friends and get a bonus"
+        personal_accaunt: "\uD83D\uDCF1Мій кабінет",
+        menu: "\uD83D\uDCD3 Меню",
+        basket: "\uD83D\uDCD7 МоЇ закази",
+        home_delivery: "\uD83D\uDCD3 Доставка",
+        reserve_table: "\u23F2 Забронювати столик",
+        review: "\uD83D\uDCE7 Написати відгук",
+        about: "\uD83C\uDFDB Про нас",
+        inviting_friends: "\uD83D\uDC71 Запросіть своїх друзів та отримайте бонус"
     },
 
-    back: "\uD83D\uDD19 Back",
+    back: "\uD83D\uDD19 Назад",
 
-    back_in_menu: "\uD83D\uDD19 Back in menu",
+    back_in_menu: "\uD83D\uDD19 Назад у меню",
 
     personal_accaunt: {
-        card: "\uD83D\uDCB3 Personal card",
-        bonus: "\uD83C\uDF81 About bonuses",
+        card: "\uD83D\uDCB3 Персональна карта",
+        bonus: "\uD83C\uDF81 Про бонуси",
     },
 
     card: {
-        change_phone: "\uD83D\uDCDEИзм. номер",
-        change_adres: "\uD83D\uDDFAИзм. адрес",
-        change_date_of_birthday: "\uD83D\uDCC5Изменить дату рождения",
+        change_phone: "\uD83D\uDCDEЗмінити номер",
+        change_adres: "\uD83D\uDDFAЗмінити адресу",
+        change_date_of_birthday: "\uD83D\uDCC5Змінити дату народження",
     },
 
     send_telephone: {
-        activation: "Активация карты"
+        activation: "Активація карти"
     },
 
     menu: {
-        first_meal: "\uD83C\uDF7D Первые блюда",
-        second_meal: "\uD83C\uDF7D Вторые блюда",
-        hot_meal: "\uD83C\uDF7D Горячие блюда",
-        soup: "\uD83C\uDF7D Супы",
-        salads: "\uD83E\uDD57 Салаты",
-        on_the_grill: "\uD83C\uDF56 На мангале",
-        pizza: "\uD83C\uDF55 Пиццы",
-        rolls: "\uD83C\uDF63 Роллы",
-        drinks: "\uD83C\uDF79 Напитки",
-        sweet: "\uD83C\uDF70 Сладкое"
+        first_meal: "\uD83C\uDF7D Перші страви",
+        second_meal: "\uD83C\uDF7D Другі страви",
+        hot_meal: "\uD83C\uDF7D Спеконті страви",
+        soup: "\uD83C\uDF7D Супи",
+        salads: "\uD83E\uDD57 Салати",
+        on_the_grill: "\uD83C\uDF56 На мангалі",
+        pizza: "\uD83C\uDF55 Піци",
+        rolls: "\uD83C\uDF63 Роли",
+        drinks: "\uD83C\uDF79 Напії",
+        sweet: "\uD83C\uDF70 СОлодке"
     },
     
     reserve_table: {
@@ -54,9 +54,9 @@ module.exports = {
     
     about: {
         telephone_number: "Наш номер",
-        adress: "Наш адрес",
+        adress: "Наша адреса",
         staff: "Наш персонал",
-        interior: "Наш интерьер",
-        closest_places: "Ближайшие заведения"
+        interior: "Наш інтер'ер",
+        closest_places: "Найближчі заклади"
     }
 }
