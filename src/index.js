@@ -3,6 +3,7 @@ const bot_command = require("./bot_commands")
 const keyboards = require("./keyboard")
 const keyboard_text = require("./keyboard_text")
 const func = require("./functions/findUser")
+const adress = require("./functions/choiceAdress")
 
 bot_command()
 
@@ -16,7 +17,9 @@ bot.on("message", msg => {
     switch(msg.text) {
         case keyboard_text.main.personal_accaunt:
             console.log("Пользователь " + username + " заходит в личный аккаунт")
-            func.findUser(id, first_name, last_name, username)
+            func.findUser(id, first_name, last_name, username, bot).then(()=>{
+                console.log("Успешно")
+            })
         break
         case keyboard_text.back:
             console.log("Пользователь " + username + " заходит в общее меню")
@@ -28,17 +31,13 @@ bot.on("message", msg => {
             })
         break       
     }
-    bot.on("callback_query", query => {
-        const { chat, id, text } = query.message
-        const { id } = query.message.chat
-        const { data } = query
-        console.log(data)
-        //вставить вызов метода choiceAdress()
-        switch(query.data) {
-            case "Ukraine_Odessa":
-                bot.sendMessage(query.message.chat.id, "Вы выбрали Украину!", {})
-                //console.log(username + "Выбрал Украина-Одесса")
-            break
-        }
-    })
+})
+
+bot.on("callback_query", query => {
+    bot.answerCallbackQuery(query.id, "Вы выбрали город")
+    const { id } = query.message.chat
+    const { data } = query
+    const { username } = query.message.chat
+    console.log(data)
+    adress.choiceAdress(id, data, username, bot)
 })
