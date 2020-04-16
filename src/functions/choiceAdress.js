@@ -12,17 +12,29 @@ async function choiceAdress(id, data, username, bot, query) {
         console.log(data)
             switch(data) {
                 case "Ukraine":
-                    database = new Client.Pool(DB)
-                    var choiceUkraine = 'SELECT name_country FROM public."Country" WHERE name_country = ($1)'
-                    const insert = await database.query(choiceUkraine, ['Ukraine'])
-                    bot.answerCallbackQuery(query.id, "Вы выбрали " + "Ukraine")
-                    // bot.sendMessage(id, "Вы выбрали Одессу\uD83C\uDDFA\uD83C\uDDE6\u2693" + "!", {
-                    //     parse_mode: "Markdown",
-                    //     reply_markup: {
-                    //         keyboard: keyboards.personal_accaunt
-                    //         }
-                    //     }); 
-                break
+                    database = new Client.Pool(DB);
+                    var choiceUkraine = 'SELECT name_country FROM public."Country" WHERE name_country = ($1)';
+                    const insert = await database.query(choiceUkraine, ['Ukraine']);
+                    bot.answerCallbackQuery(query.id, "Ви обрали Україну");
+                    bot.sendMessage(id, text.choiseCity, {
+                        parse_mode: "HTML",
+                        reply_markup: {
+                            inline_keyboard:
+                            [
+                                [
+                                    { text: "Одеса\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Odessa" },
+                                    // { text: "Миколаїв\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Миколаїв" },
+                                    // { text: "Київ\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Київ" },
+                                    // { text: "Херсон\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Херсон" },
+                                    // { text: "Львів\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Львів" }
+                                ]
+                            ]
+                        }
+                    });
+                break;
+                case "Odessa":
+                    database = new Client.Pool(DB);
+                break;
             }
     }
     catch(ex) {

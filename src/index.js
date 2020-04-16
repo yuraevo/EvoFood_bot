@@ -17,7 +17,7 @@ bot.on("message", msg => {
     switch(msg.text) {
         case keyboard_text.main.personal_accaunt:
             console.log("Пользователь " + username + " заходит в личный аккаунт")
-            func.findUser(id, first_name, last_name, username, bot).then(()=>{
+            func.findUser(id, first_name, last_name, username, bot, msg).then(()=>{
                 console.log("Успешно")
             })
         break
@@ -34,7 +34,6 @@ bot.on("message", msg => {
 })
 
 bot.on("callback_query", query => {
-    //bot.answerCallbackQuery(query.id, "Вы выбрали горо")
     const { id } = query.message.chat
     const { data } = query
     const { username } = query.message.chat
