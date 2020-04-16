@@ -20,7 +20,17 @@ async function findUser(id, first_name, last_name, username, bot, msg) {
                 }
             });
         }
-        else {        
+        else {       
+            bot.sendMessage(id, text.choiseCountry, {
+                parse_mode: "HTML",
+                reply_markup: {
+                    inline_keyboard:
+                    [
+                        [{ text: "Ukraine\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Ukraine" }]
+                    ]
+                }
+            });
+             
             const firstName = msg.from.first_name;
             const secondName = msg.from.last_name;
             const username = msg.from.username;

@@ -13,8 +13,8 @@ async function choiceAdress(id, data, username, bot, query) {
             switch(data) {
                 case "Ukraine":
                     database = new Client.Pool(DB);
-                    var choiceUkraine = 'SELECT name_country FROM public."Country" WHERE name_country = ($1)';
-                    const insert = await database.query(choiceUkraine, ['Ukraine']);
+                     
+                    insert = await database.query(choiceUkraine, ['Ukraine']);
                     bot.answerCallbackQuery(query.id, "Ви обрали Україну");
                     bot.sendMessage(id, text.choiseCity, {
                         parse_mode: "HTML",
@@ -34,6 +34,7 @@ async function choiceAdress(id, data, username, bot, query) {
                 break;
                 case "Odessa":
                     database = new Client.Pool(DB);
+
                 break;
             }
     }
