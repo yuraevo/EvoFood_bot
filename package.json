@@ -11,6 +11,7 @@
   "dependencies": {
     "alert-node": "^2.1.4",
     "body-parser": "^1.19.0",
+    "lodash": "^4.17.15",
     "node-telegram-bot-api": "^0.40.0",
     "pg": "^7.18.1"
   }

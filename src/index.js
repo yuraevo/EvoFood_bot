@@ -4,6 +4,7 @@ const keyboards = require("./keyboard")
 const keyboard_text = require("./keyboard_text")
 const func = require("./functions/findUser")
 const adress = require("./functions/choiceAdress")
+const choiseAdress2 = require("./functions/choiseAdress2")
 
 bot_command()
 
@@ -38,5 +39,6 @@ bot.on("callback_query", query => {
     const { data } = query
     const { username } = query.message.chat
     console.log(data)
-    adress.choiceAdress(id, data, username, bot, query)
+    adress.choiceAdress2(id, data, username, bot, query)
+
 })

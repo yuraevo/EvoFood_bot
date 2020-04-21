@@ -39,7 +39,7 @@ async function findUser(id, first_name, last_name, username, bot, msg) {
          
             database = new Client.Pool(DB);
             var insertFirstNameNewUser = 'INSERT INTO public."User" (first_name, last_name, username, personal_key, adress, phone) VALUES ($1, $2, $3, $4, $5, $6)';
-            inProcess = await database.query(insertFirstNameNewUser, [firstName, secondName, username, ChatId, 2, 0949520689 ]);    
+           // inProcess = await database.query(insertFirstNameNewUser, [firstName, secondName, username, ChatId, 2, 0949520689 ]);    
         }
     }
     catch(ex){
