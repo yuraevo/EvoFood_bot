@@ -14,3 +14,4 @@ const bot = new TelegramBot(TOKEN, {
 console.log("Bot has been started...")
 
 module.exports = bot
+
