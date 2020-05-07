@@ -1,3 +1,4 @@
+var dateTime = require('node-datetime');
 const DB = require("../connect_db");
 const Client  = require('pg');
 const registrationooo = require("./userRegistration");
@@ -6,6 +7,8 @@ const keyboards = require("../keyboard");
 const text = require("../text");
 const TWO = 2;
 
+var dt = dateTime.create();
+dt.format('m/d/y H:M');
 
 async function registration(id, data, username, bot, query) {
     try {
@@ -102,25 +105,32 @@ async function registration(id, data, username, bot, query) {
                     async function userRegistration(query, uniqueItems) {
                         try {
                             return await new Promise(async function(resolve){
-                                uniqueItems = Array.from(new Set(array));
+                                uniqueItems = Array.from(new Set(array)); // Уникальные значения
                                 console.log(uniqueItems);
                                 console.log("Регистрация Юзера")
                                 database = new Client.Pool(DB);
                                 await database.connect().then(console.log("Соединение установлено"));;
                                 var ID_Odessa_SELECT = 'SELECT id FROM public."City" WHERE name_city = ($1)'; // Выбираем Одессу
-                                var ID_Odessa = await database.query(ID_Odessa_SELECT, ["Odessa"]); 
+                                var ID_Odessa = await database.query(ID_Odessa_SELECT, ["Odessa"]); //Запрос выбора Одессы
                                 
                                 console.table("Айди Одессы: " + ID_Odessa.rows[0].id);
-                                const INSERT_CITY_IN_ADRESS = 'INSERT INTO public."Adress" (city, street) VALUES ($1, $2)';
+                                const INSERT_CITY_IN_ADRESS = 'INSERT INTO public."Adress" (city, street) VALUES ($1, $2)'; // Вставить в Адресс
                                 console.log("Вывод уник айтемс " + uniqueItems[0])
                                 await database.query(INSERT_CITY_IN_ADRESS, [ID_Odessa.rows[0].id, uniqueItems[0]]); //Добавление улицы в Adress
                                 console.log(uniqueItems[0]);
 
-                                var ID_ADRESS_SELECT = 'SELECT id FROM public."Adress" WHERE street = ($1)';// взятие айди адреса
+                                var ID_ADRESS_SELECT = 'SELECT id FROM public."Adress" WHERE street = ($1)'; // взятие айди введенного адреса 
                                 const streetUser = await database.query(ID_ADRESS_SELECT, [uniqueItems[0]]); 
 
-                                var INSERT_USER = 'INSERT INTO public."User"(first_name, last_name, username, personal_key, adress, phone) VALUES ($1, $2, $3, $4, $5, $6)';
+                                var INSERT_USER = 'INSERT INTO public."User"(first_name, last_name, username, personal_key, adress, phone) VALUES ($1, $2, $3, $4, $5, $6)'; //полное добавдение в Юзера
                                 await database.query(INSERT_USER, [query.message.chat.first_name, query.message.chat.last_name, query.message.chat.username, query.message.chat.id, streetUser.rows[0].id, uniqueItems[1]]); 
+
+                                var SELECT_CURRENT_USER = 'SELECT id FROM public."User" WHERE username = ($1)';
+                                var CURRENT_USER = await database.query(SELECT_CURRENT_USER, [query.message.chat.username]); // текущий Юзер
+                                console.log("Текущий юрез: " + CURRENT_USER.rows[0].id)
+
+                                var INSERT_USER_INTO_CLIENT = 'INSERT INTO public."Client" (user, bonus, count_friend, start_date) VALUES ($1, $2, $3, $4)';
+                                await database.query(INSERT_USER_INTO_CLIENT, [CURRENT_USER.rows[0].id, 0, 0, new Date(dt.now())])
                                 resolve()
                             })
                         }
@@ -132,7 +142,7 @@ async function registration(id, data, username, bot, query) {
                             console.log("out on userRegistrration");
                         }
                     }
-                    
+
                     await inputAdress(array,uniqueItems);
                     await inputPhone(array, uniqueItems);
                     await userRegistration(query, uniqueItems);
