@@ -4,6 +4,7 @@ const keyboards = require("./keyboard")
 const keyboard_text = require("./keyboard_text")
 const func = require("./functions/findUser")
 const adress = require("./functions/registration_user")
+const personal_card_user = require("./functions/personal_card_user")
 
 bot_command(); 
 
@@ -21,8 +22,14 @@ bot.on("message", msg => {
             func.findUser(id, first_name, last_name, username, bot, msg);
         break;
 
+        case keyboard_text.main.card: 
+            console.log("Пользователь " + username + " нажал кнопку ЛИЧНЫЙ КАБИНЕТ");
+            func.findUser(id, first_name, last_name, username, bot, msg);
+        break;
+
         case keyboard_text.personal_accaunt.card:
-            
+            console.log("Пользователь " + username + " нажал кнопку Карта");
+            personal_card_user.personalCardUser(id, first_name,last_name,username,bot,msg)
         break;
 
         case keyboard_text.back:

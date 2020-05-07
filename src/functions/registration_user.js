@@ -6,6 +6,8 @@ const keyboard_text = require("../keyboard_text");
 const keyboards = require("../keyboard");
 const text = require("../text");
 const TWO = 2;
+const currentDate = new Date();
+var parse = require('postgres-date')
 
 var dt = dateTime.create();
 dt.format('m/d/y H:M');
@@ -130,8 +132,10 @@ async function registration(id, data, username, bot, query) {
                                 console.log("Текущий юрез: " + CURRENT_USER.rows[0].id)
 
                                 var INSERT_USER_INTO_CLIENT = 'INSERT INTO public."Client" (user, bonus, count_friend, start_date) VALUES ($1, $2, $3, $4)';
-                                await database.query(INSERT_USER_INTO_CLIENT, [CURRENT_USER.rows[0].id, 0, 0, new Date(dt.now())])
+                                await database.query(INSERT_USER_INTO_CLIENT, [CURRENT_USER.rows[0].id, 6, 4, '2011-01-23 22:15:51Z']);
                                 resolve()
+                            }).catch(ex => {
+                                console.log('Something wrong happend - ' + ex);
                             })
                         }
                         catch(ex) {
