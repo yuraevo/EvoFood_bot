@@ -43,7 +43,7 @@ bot.on("message", msg => {
                 }
             });
         break;
-
+ 
         case keyboard_text.menu.soup:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку Суп");
