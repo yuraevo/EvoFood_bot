@@ -47,7 +47,7 @@ bot.on("message", msg => {
         case keyboard_text.menu.soup:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку Суп");
-            choise_dish.choiseDish(bot,id,username)
+            choise_dish.choiseDish(bot, id, first_name, username, "Супи")
         
         break;
 
