@@ -41,21 +41,24 @@ module.exports = {
     ], 
 
     back_in_menu: [
-        [kb.back_in_menu]
+        [kb.menu]
     ],
 
     menu: [
-        //[kb.menu.first_meal, kb.menu.second_meal],
-        //[kb.menu.second_meal],
         [kb.menu.hot_meal],
         [kb.menu.on_the_grill],
         [kb.menu.soup, kb.menu.salads], 
-        //[kb.menu.salads],
         [kb.menu.rolls, kb.menu.pizza],
-       // [kb.menu.pizza],
         [kb.menu.drinks, kb.menu.sweet],
-        //[kb.menu.sweet],
         [kb.back]
+    ],
+
+    drinks: [
+        [kb.drink.tea, kb.drink.coffee],
+        [kb.drink.juice, kb.drink.water],
+        [kb.drink.cocktail, kb.drink.wine],
+        [kb.drink.strong_alcohol],
+        [kb.back_in_menu]
     ],
 
     home_delivery:[

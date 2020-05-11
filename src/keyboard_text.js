@@ -38,8 +38,18 @@ module.exports = {
         on_the_grill: "\uD83C\uDF56 На мангалі",
         pizza: "\uD83C\uDF55 Піци",
         rolls: "\uD83C\uDF63 Роли",
-        drinks: "\uD83C\uDF79 Напії",
-        sweet: "\uD83C\uDF70 СОлодке"
+        drinks: "\uD83C\uDF79 Напої",
+        sweet: "\uD83C\uDF70 Солодке"
+    },
+
+    drink: {
+        coffee: "☕ Кава",
+        tea: "☕ Чай",
+        water: "🚰 Вода",
+        juice: "🧃 Соки",
+        cocktail: "🍹 Коктейль",
+        wine: "🍷 Вино",
+        strong_alcohol: "🥃 Міцний алкоголь",
     },
     
     reserve_table: {
