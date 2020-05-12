@@ -1,55 +1,55 @@
 module.exports = {
     main: {
-        personal_accaunt: "\uD83D\uDCF1Мій кабінет",
+        personal_accaunt: "\uD83D\uDCF1 Мой кабинет",
         menu: "\uD83D\uDCD3 Меню",
-        basket: "\uD83D\uDCD7 МоЇ закази",
+        basket: "\uD83D\uDCD7 Мои заказы",
         home_delivery: "\uD83D\uDCD3 Доставка",
-        reserve_table: "\u23F2 Забронювати столик",
-        review: "\uD83D\uDCE7 Написати відгук",
-        about: "\uD83C\uDFDB Про нас",
-        inviting_friends: "\uD83D\uDC71 Запросіть своїх друзів та отримайте бонус"
+        reserve_table: "\u23F2 Забронировать столик",
+        review: "\uD83D\uDCE7 Написать отзыв",
+        about: "\uD83C\uDFDB О заведении",
+        inviting_friends: "\uD83D\uDC71 Пригласите друзей и получите бонусы"
     },
 
     back: "\uD83D\uDD19 Назад",
 
-    back_in_menu: "\uD83D\uDD19 Назад у меню",
+    back_in_menu: "\uD83D\uDD19 Вернуться в меню",
 
     personal_accaunt: {
-        card: "\uD83D\uDCB3 Персональна карта",
-        bonus: "\uD83C\uDF81 Про бонуси",
+        card: "\uD83D\uDCB3 Персональная карта",
+        bonus: "\uD83C\uDF81 О бонусах",
     },
 
     card: {
-        change_phone: "\uD83D\uDCDEЗмінити номер",
-        change_adres: "\uD83D\uDDFAЗмінити адресу",
-        change_date_of_birthday: "\uD83D\uDCC5Змінити дату народження",
+        change_phone: "\uD83D\uDCDEИзменить телефон",
+        change_adres: "\uD83D\uDDFAИзменить адрес",
+        change_date_of_birthday: "\uD83D\uDCC5Изменить дату рождения",
     },
 
     send_telephone: {
-        activation: "Активація карти"
+        activation: "Активация карты"
     },
 
     menu: {
-        first_meal: "\uD83C\uDF7D Перші страви",
-        second_meal: "\uD83C\uDF7D Другі страви",
-        hot_meal: "\uD83C\uDF7D Спеконті страви",
-        soup: "\uD83C\uDF7D Супи",
-        salads: "\uD83E\uDD57 Салати",
-        on_the_grill: "\uD83C\uDF56 На мангалі",
-        pizza: "\uD83C\uDF55 Піци",
-        rolls: "\uD83C\uDF63 Роли",
-        drinks: "\uD83C\uDF79 Напої",
-        sweet: "\uD83C\uDF70 Солодке"
+        first_meal: "\uD83C\uDF7D Первые блюда",
+        second_meal: "\uD83C\uDF7D Вторые блюда",
+        hot_meal: "🔥 Горячие блюда",
+        soup: "\uD83C\uDF7D Супы",
+        salads: "\uD83E\uDD57 Салаты",
+        on_the_grill: "🥓 На мангале",
+        pizza: "\uD83C\uDF55 Пиццы",
+        rolls: "\uD83C\uDF63 Ролы",
+        drinks: "\uD83C\uDF79 Напитки",
+        sweet: "\uD83C\uDF70 Сладкое"
     },
 
     drink: {
-        coffee: "☕ Кава",
-        tea: "☕ Чай",
-        water: "🚰 Вода",
-        juice: "🧃 Соки",
-        cocktail: "🍹 Коктейль",
+        coffee: "☕ Кофе",
+        tea: "🍵 Чай",
+        water: "🌊 Вода",
+        juice: "🧃 Свежевыжатые соки",
+        cocktail: "🍹 Коктейли",
         wine: "🍷 Вино",
-        strong_alcohol: "🥃 Міцний алкоголь",
+        strong_alcohol: "🥃 Крепкий алкоголь",
     },
     
     reserve_table: {

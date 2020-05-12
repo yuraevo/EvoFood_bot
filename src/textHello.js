@@ -5,7 +5,7 @@ class TextHello {
     }
     messageHello() {
         return `
-<strong>Здраствуйте, дорогой ${this._msg.chat.first_name}!\uD83D\uDC99 </strong>
+<strong>Здраствуйте, ${this._msg.chat.first_name}!\uD83D\uDC99 </strong>
                     
 Вот и пришло время знакомиться!
                     

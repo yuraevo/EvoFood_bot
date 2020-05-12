@@ -1,11 +1,12 @@
-const bot = require("./bot") 
-const bot_command = require("./bot_commands")
-const keyboards = require("./keyboard")
-const keyboard_text = require("./keyboard_text")
-const func = require("./functions/findUser")
-const adress = require("./functions/registration_user")
-const personal_card_user = require("./functions/personal_card_user")
-const choise_dish = require("./functions/choiseDish")
+const bot = require("./bot");
+const bot_command = require("./bot_commands");
+const keyboards = require("./keyboard");
+const keyboard_text = require("./keyboard_text");
+const func = require("./functions/findUser");
+const adress = require("./functions/registration_user");
+const personal_card_user = require("./functions/personal_card_user");
+const choise_dish = require("./functions/choiseDish");
+const addToCard = require("./functions/inline_keyboard_dish_description");
 
 bot_command(); 
 
@@ -53,43 +54,37 @@ bot.on("message", msg => {
         case keyboard_text.menu.soup:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку Суп");
-            choise_dish.choiseDish(bot, id, first_name, username, "Супи")
-        
+            choise_dish.choiseDish(bot, id, first_name, username, "Супы")
         break;
 
         case keyboard_text.menu.hot_meal:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку Горячие блюда");
-            choise_dish.choiseDish(bot, id, first_name, username, "Спекотні страви")
-        
+            choise_dish.choiseDish(bot, id, first_name, username, "Горячие блюда")
         break;
 
         case keyboard_text.menu.on_the_grill:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку НА МАНГАЛЕ");
-            choise_dish.choiseDish(bot, id, first_name, username, "На мангалі")
-        
+            choise_dish.choiseDish(bot, id, first_name, username, "На мангале")
         break;
 
         case keyboard_text.menu.salads:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку САЛАТЫ");
-            choise_dish.choiseDish(bot, id, first_name, username, "Салати")
-        
+            choise_dish.choiseDish(bot, id, first_name, username, "Салаты")
         break;
 
         case keyboard_text.menu.rolls:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку Роллы");
-            choise_dish.choiseDish(bot, id, first_name, username, "Роли")
-        
+            choise_dish.choiseDish(bot, id, first_name, username, "Роллы")
         break;
 
         case keyboard_text.menu.pizza:
             //bot.deleteMessage(id, msg.chat.message_id),
             console.log("Пользователь " + username + " нажал кнопку Пиццы");
-            choise_dish.choiseDish(bot, id, first_name, username, "Піци")
-        
+            choise_dish.choiseDish(bot, id, first_name, username, "Пиццы")
         break;
 
         case keyboard_text.drink.tea:
@@ -99,7 +94,7 @@ bot.on("message", msg => {
 
         case keyboard_text.drink.coffee:
             console.log("Пользователь " + username + " нажал кнопку КОФЕ");
-            choise_dish.choiseDish(bot, id, first_name, username, "Кава");
+            choise_dish.choiseDish(bot, id, first_name, username, "Кофе");
         break;
 
         case keyboard_text.drink.juice:
@@ -124,12 +119,12 @@ bot.on("message", msg => {
 
         case keyboard_text.drink.strong_alcohol:
             console.log("Пользователь " + username + " нажал кнопку  КРЕПКИЙ АЛКОГОЛЬ");
-            choise_dish.choiseDish(bot, id, first_name, username, "Міцний алкоголь");
+            choise_dish.choiseDish(bot, id, first_name, username, "Крепкий алкоголь");
         break;
 
         case keyboard_text.menu.sweet:
             console.log("Пользователь " + username + " нажал кнопку СЛАДКОЕ");
-            choise_dish.choiseDish(bot, id, first_name, username, "Солодке");
+            choise_dish.choiseDish(bot, id, first_name, username, "Сладкое");
         break;
 
         case keyboard_text.back:
@@ -160,4 +155,5 @@ bot.on("callback_query", query => {
     const { username } = query.message.chat;
     console.log(data);
     adress.registration(id, data, username, bot, query);
+    addToCard.addToCard(id, data, username, bot, query);
 })
