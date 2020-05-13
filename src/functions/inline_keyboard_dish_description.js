@@ -5,7 +5,7 @@ const keyboard_text = require("../keyboard_text");
 const keyboards = require("../keyboard");
 const text = require("../text");
 
-async function addToCard(id, data, username, bot, query) {
+async function inline_keyboard_dish_description(id, data, username, bot, query) {
     try {
         database = new Client.Pool(DB);
         var queryUser = 'SELECT name_dish, description, cost FROM public."Dish" WHERE name_dish = ($1)';
@@ -22,7 +22,7 @@ async function addToCard(id, data, username, bot, query) {
                         reply_markup: {
                             inline_keyboard: 
                                 [
-                                    [{text: "Да", callback_data: "Добавить в корзину"}],
+                                    [{text: `Да`, callback_data: `К: ${dish.rows[0].name_dish}` }],
                                     [{text: "Нет", callback_data: "Вернуться в меню"}]
                                 ]
                         }
@@ -35,9 +35,9 @@ async function addToCard(id, data, username, bot, query) {
         console.log('Something wrong happend - ' + ex);
     }
     finally {
-    await database.end()
-    console.log("DB disconnect");
+        await database.end()
+        console.log("DB disconnect");
     }
 }
 
-module.exports.addToCard = addToCard;
+module.exports.inline_keyboard_dish_description = inline_keyboard_dish_description;

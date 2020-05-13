@@ -21,6 +21,7 @@ async function registration(id, data, username, bot, query) {
             case "Ukraine":
                 //database = new Client.Pool(DB);
                 //insert = await database.query(choiceCity, ['Ukraine']);
+                bot.sendChatAction(id, "typing")
                 bot.answerCallbackQuery(query.id, "Ви обрали Україну");
                 bot.sendMessage(id, text.choiceCity, {
                     parse_mode: "HTML",
