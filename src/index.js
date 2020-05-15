@@ -2,15 +2,19 @@ const bot = require("./bot");
 const bot_command = require("./bot_commands");
 const keyboards = require("./keyboard");
 const keyboard_text = require("./keyboard_text");
-const func = require("./functions/findUser");
+const choise_country = require("./functions/findUser");
 const adress = require("./functions/registration_user");
 const personal_card_user = require("./functions/personal_card_user");
 const choise_dish = require("./functions/choiseDish");
 const inline_keyboard_dish_description = require("./functions/inline_keyboard_dish_description");
 const inline_keyboard_add_to_card = require("./functions/inline_keyboard_add_to_card")
 
+// const token = require("./token")
+// const TOKEN = token.TOKEN
+
 // bot.openWebHook()
-// bot.setWebHook(`https://1e6828c7.ngrok.io/bot${TOKEN}`)
+// bot.setWebHook(`http://5bbc89bd.ngrok.io/bot${TOKEN}`)
+
 bot_command(); 
 
 bot.on("message", msg => {
@@ -25,7 +29,7 @@ bot.on("message", msg => {
         case keyboard_text.main.personal_accaunt: 
             bot.sendChatAction(id, "typing")
             console.log("Пользователь " + username + " нажал кнопку ЛИЧНЫЙ КАБИНЕТ");
-            func.findUser(id, first_name, last_name, username, bot, msg);
+            choise_country.findUser(id, first_name, last_name, username, bot, msg);
         break;
 
         case keyboard_text.personal_accaunt.card:
@@ -176,8 +180,10 @@ bot.on("callback_query", query => {
     const { id } = query.message.chat;
     const { data } = query;
     const { username } = query.message.chat;
+    const { first_name } = query.message.chat;
+    const { last_name } = query.message.chat;
     console.log(data);
-    adress.registration(id, data, username, bot, query);
+    adress.registration(id, data, first_name, last_name, username, bot, query);
     inline_keyboard_dish_description.inline_keyboard_dish_description(id, data, username, bot, query);
     inline_keyboard_add_to_card.inline_keyboard_add_to_card(id, data, username, bot, query);
 })

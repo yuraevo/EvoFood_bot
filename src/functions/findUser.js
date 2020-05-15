@@ -6,13 +6,13 @@ const keyboards = require("../keyboard");
 const text = require("../text");
 
 async function findUser(id, first_name, last_name, username, bot, msg) {
-    try
-    {
+    try {
         database = new Client.Pool(DB);
-        var queryUser = 'SELECT first_name FROM public."User" WHERE username = ($1)';
-        user = await database.query(queryUser, [username]);
-        console.table(user.rows);
-        if(user.rows[0] != null) {
+        var queryUser = `SELECT first_name 
+                        FROM public."User" WHERE username = ($1)`; //поиск юзера в базе
+        user = await database.query(queryUser, [username]); //запрос юзера в базе
+        console.table(user.rows); //вывод юзера
+        if(user.rows[0] != null) { //если есть, добро пожаловать
             bot.sendMessage(id, "Добро пожаловать, " + user.rows[0].first_name + "!", {
                 parse_mode: "Markdown",
                 reply_markup: {
@@ -20,26 +20,22 @@ async function findUser(id, first_name, last_name, username, bot, msg) {
                 }
             });
         }
-        else {       
-            bot.sendMessage(id, text.choiseCountry, {
-                parse_mode: "HTML",
-                reply_markup: {
-                    inline_keyboard:
+        else {      
+            var TEXT = `<strong>${first_name}, выберите пожалуйста страну, где вы живете ⤵</strong>`
+            var query = `SELECT name_country 
+                        FROM public."Country"`; //запрос на список стран
+            country = await database.query(query); //список стран
+            var opts = { inline_keyboard: [] };
+            country.rows.forEach(element => {
+                opts.inline_keyboard.push(
                     [
-                        [{ text: "Ukraine\uD83C\uDDFA\uD83C\uDDE6", callback_data: "Ukraine" }]
-                    ]
-                }
-            });
-             
-            const firstName = msg.from.first_name;
-            const secondName = msg.from.last_name;
-            const username = msg.from.username;
-            const messageDate = msg.date;
-            const ChatId = msg.chat.id;
-         
-            database = new Client.Pool(DB);
-            var insertFirstNameNewUser = 'INSERT INTO public."User" (first_name, last_name, username, personal_key, adress, phone) VALUES ($1, $2, $3, $4, $5, $6)';
-           // inProcess = await database.query(insertFirstNameNewUser, [firstName, secondName, username, ChatId, 2, 0949520689 ]);    
+                        {text: element.name_country, callback_data: `Выб. страна: ${element.name_country}` }
+                    ]);
+            }); 
+            bot.sendMessage(id, TEXT, { //вывести страны в бот
+                parse_mode: "HTML",
+                reply_markup: opts
+            });  
         }
     }
     catch(ex){

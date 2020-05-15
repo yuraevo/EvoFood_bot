@@ -6,14 +6,16 @@ const bot = new TelegramBot(TOKEN, {
     polling: {
         timeout:1000,
         interval: 1000,
-        //autoStart: true,
-        // params: {
-            // timeout: 10000
-        // }
-    } 
+        autoStart: true,
+        params: {
+            timeout: 10000
+        }
+   } 
     // webHook: {
     //     port: 3000,
-    //     autoOpen: false
+    //     autoOpen: false,
+    //     // timeout: 1000,
+    //     // interval: 1000
     // }
 })
 console.log("Bot has been started...")

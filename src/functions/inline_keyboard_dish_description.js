@@ -22,8 +22,8 @@ async function inline_keyboard_dish_description(id, data, username, bot, query) 
                         reply_markup: {
                             inline_keyboard: 
                                 [
-                                    [{text: `Да`, callback_data: `К: ${dish.rows[0].name_dish}` }],
-                                    [{text: "Нет", callback_data: "Вернуться в меню"}]
+                                    [{text: "🤤 Да", callback_data: `К: ${dish.rows[0].name_dish}` }],
+                                    [{text: "🔙 Нет, назад", callback_data: `Н: ${dish.rows[0].name_dish}`}]
                                 ]
                         }
                     });
@@ -35,7 +35,7 @@ async function inline_keyboard_dish_description(id, data, username, bot, query) 
         console.log('Something wrong happend - ' + ex);
     }
     finally {
-        await database.end()
+        //await database.end()
         console.log("DB disconnect");
     }
 }
