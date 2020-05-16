@@ -26,7 +26,7 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                             try {
                                 return await new Promise(async function (resolve) {
                                     console.log("Зашло в адд то кард")
-                                    var DISH_QUERY = `SELECT id
+                                    var DISH_QUERY = `SELECT id, name_dish
                                                     FROM public."Dish" WHERE name_dish = ($1)`;
                                     var CLIENT_ID_QUERY = `SELECT public."Client".id
                                                     FROM public."Client" JOIN public."User"
@@ -50,14 +50,16 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                                     console.log("Вводит количества: " + uniqueItems);
                                                                     insert_into_order_dish(array, uniqueItems, clientID); // вызов второго метода
                                                                 }
-                                                            });
-                                                            resolve();
+                                                        });
+                                                        resolve();
                                                     });
                                                 }
                                                 catch(ex) {
                                                     console.log('Что-то произошло - ' + ex);
                                                 }
-                                                finally { }
+                                                finally { 
+                                                   
+                                                }
                                             }
 
                                             async function insert_into_order_dish(array, uniqueItems, clientID) {
@@ -69,6 +71,16 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                     console.log("Вывод количества: " + uniqueItems[0])
                                                     console.log("Вывод айди клиента: " + clientID)
                                                     await database.query(INSERT_INTO_ORDER_DISH_QUERY, [SELECTED_DISH.rows[0].id, uniqueItems[0], clientID]); //Исполнение функции
+                                                    await bot.sendMessage(id, `Ваш заказ <i>${SELECTED_DISH.rows[0].name_dish}(x${uniqueItems[0]})</i> в корзине!`, {
+                                                        parse_mode: "HTML",
+                                                        reply_markup: {
+                                                            inline_keyboard: 
+                                                                [
+                                                                    [{text: "Зайти в корзину", callback_data: `Корзина` }],
+                                                                    [{text: "🔙 Назад ", callback_data: `Корзина`}]
+                                                                ]
+                                                        }
+                                                    })
                                                 }
                                                 catch(ex) {
                                                     console.log('Что-то произошло- ' + ex);
