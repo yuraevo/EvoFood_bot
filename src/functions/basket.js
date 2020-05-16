@@ -52,6 +52,16 @@ async function show_basket(bot, id, first_name, username)
                 }
             })
         }
+        else {
+            TEXT = `<strong>${first_name}, Ваш список заказов пуст </strong> 
+            
+У нас большой выбор вкусных блюд🍝 
+Переходите в меню👇`
+            await bot.sendDocument(id, "img/travolta4.gif", {
+                parse_mode: "HTML",
+                caption: TEXT,
+            })
+        }
     }
     catch(ex) {
         console.log('Something wrong happend - ' + ex)

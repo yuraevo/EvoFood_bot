@@ -13,8 +13,7 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
             case 'Очистить корзину':
                 console.log("Зашло в очистить корзину")
                 TEXT = `
-<strong> ${first_name}, Вы действительно хотите удалить все содержимое корзины? 
-                `
+<strong>${first_name}, Вы действительно хотите удалить все содержимое корзины? </strong>`
                 bot.sendMessage(id, TEXT, {
                     parse_mode: "HTML",
                     reply_markup: {
@@ -27,18 +26,18 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                 });
             break;
 
-            case 'Да, очистить корзину':
-                var DELETE_BASKET_USER_QUERY = `DELETE 
-                FROM "Order_Dish" JOIN "Dish" ON "Dish".id = "Order_Dish".dish
-                    JOIN "Client" ON "Client".id = "Order_Dish".client
-                    JOIN "User" ON "User".id = "Client".user
-                WHERE "User".username = ($1)`;  // удаление
-        DELETE_BASKET_USER = await database.query(DELETE_BASKET_USER_QUERY, [username]); //запрос корзины юзера в базе 
+            case `Да, очистить корзину`:
+                var DELETE_BASKET_USER_QUERY = `DELETE FROM "Order_Dish"
+                WHERE "Order_Dish".client = (SELECT "Client".id FROM "Client" 
+                                            JOIN "User" ON "User".id = "Client".user
+                                            WHERE "User".username = ($1))`;  // удаление всех заказов из корзины
+                DELETE_BASKET_USER = await database.query(DELETE_BASKET_USER_QUERY, [username]); //запрос корзины юзера в базе 
+                
             break;
         }
     }
     catch(ex) {
-
+        console.log('Something wrong happend - ' + ex)
     }
 
     finally {
@@ -46,4 +45,4 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
     }
 }
 
-module.exports.switch_text = switch_text
+module.exports.switch_text = switch_text;

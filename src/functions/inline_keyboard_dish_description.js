@@ -15,9 +15,17 @@ async function inline_keyboard_dish_description(id, data, username, bot, query) 
             switch(data) {
                 case dish.rows[0].name_dish:
                     bot.answerCallbackQuery(query.id, "Вы выбрали " + dish.rows[0].name_dish);
-                    bot.deleteMessage(id, query.message.message_id);
-                    bot.sendDocument(id, "img/add_to_card.gif", {
-                        caption: "Добавить в корзину " + dish.rows[0].name_dish + "?",
+                    //bot.deleteMessage(id, query.message.message_id);
+                    TEXT = `
+<strong>Вы выбрали</strong> <i>${dish.rows[0].name_dish}</i>
+
+<strong>Описание:</strong> <i>${dish.rows[0].description} </i>
+
+<strong>Стоимость:</strong> <i> ${dish.rows[0].cost}₴</i>
+
+<strong>Добавить в корзину?</strong>
+                    `
+                    bot.sendMessage(id, TEXT, {
                         parse_mode: "HTML",
                         reply_markup: {
                             inline_keyboard: 

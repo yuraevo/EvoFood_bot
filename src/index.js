@@ -195,5 +195,5 @@ bot.on("callback_query", query => {
     adress.registration(id, data, first_name, last_name, username, bot, query);
     inline_keyboard_dish_description.inline_keyboard_dish_description(id, data, username, bot, query);
     inline_keyboard_add_to_card.inline_keyboard_add_to_card(id, data, username, bot, query);
-    switch_text.switch_text(id, data, first_name, last_name, username, bot, query)
+    switch_text.switch_text(id, data, first_name, last_name, username, bot, query);
 })
