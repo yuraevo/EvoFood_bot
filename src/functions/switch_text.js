@@ -9,9 +9,8 @@ const personal_card_user = require("./personal_card_user")
 async function switch_text(id, data, first_name, last_name, username, bot, query)
 {
     try {
-        //bot.deleteMessage(id, query.message.message_id);
         switch(data) {
-            case 'Очистить корзину':
+            case 'Очистить корзину?':
                 console.log("Зашло в очистить корзину")
                 TEXT = `
 <strong>${first_name}, Вы действительно хотите удалить все содержимое корзины? </strong>`
@@ -98,14 +97,7 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                         console.log("Вывод нового номера: " + uniqueItems[0])
                         await database.query(INSERT_NEW_PHONE_QUERY, [uniqueItems[0], username]); //Исполнение функции
                         await bot.sendMessage(id, `Ваш новый номер <i>${uniqueItems[0]}</i> уже в системе!`, {
-                            parse_mode: "HTML",
-                            // reply_markup: {
-                            //     inline_keyboard: 
-                            //         [
-                            //             [{text: "Зайти в корзину", callback_data: `Корзина` }],
-                            //             [{text: "🔙 Назад ", callback_data: `Корзина`}]
-                            //         ]
-                            // }
+                            parse_mode: "HTML"
                         })
                     }
                     catch(ex) {
@@ -117,6 +109,103 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                 }
                 await inputNewPhone(array, uniqueItems, username);
             break;
+
+
+            case 'Изменить адрес?':
+                console.log("Пользователь хочет изменить адрес")
+                TEXT = `
+<strong>${first_name}, Вы действительно хотите изменить адрес? </strong>`
+                await bot.sendMessage(id, TEXT, {
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: 
+                            [
+                                [{text: "📲 Да", callback_data: `Да, изменить адрес` }],
+                                [{text: "🔙 Нет, назад", callback_data: `Назад в персональный кабинет`}]
+                            ]
+                    }
+                });
+            break;
+             
+
+            case 'Да, изменить адрес': 
+                await bot.deleteMessage(id, query.message.message_id);
+                let array2 = new Array(); // массив значений
+                let uniqueItems2 = new Array(); //массив уникальных значений
+                async function inputNewAdress(array2, uniqueItems2, username) {
+                    try {
+                       return await new Promise(async function(resolve) {
+                           bot.sendMessage(id, "Введите Ваш новый адрес:", {});
+                           bot.on("message", msg => {
+                                    if(uniqueItems2.length < 1) {
+                                        adress = msg.text;
+                                        array2.push(adress);
+                                        uniqueItems2 = Array.from(new Set(array2));
+                                        console.log("Вводит новый адрес: " + uniqueItems2);
+                                        insert_new_adress_into_user(array2, uniqueItems2, username);
+                                    }
+                            });
+                            resolve();
+                        })
+                    }
+                    catch(ex) {
+                        console.log('Что-то произошло - ' + ex);
+                    }
+                    finally { 
+                        await database.end();
+                    }
+                }
+
+                async function insert_new_adress_into_user(array, uniqueItems, username) {
+                    try {
+                        database = new Client.Pool(DB);
+                        await database.connect().then(console.log("Соединение установлено"));;
+
+                        var SELECT_USER_CITY_ID_QUERY = `
+                        SELECT "City".id 
+                        FROM "Client" 
+                            JOIN "User" ON "User".id = "Client".user
+                            JOIN "Adress" ON "Adress".id = "User".adress
+                            JOIN "City" ON "City".id = "Adress".city
+                            JOIN "Country" ON "Country".id = "City".country
+                        WHERE "User".username = ($1)
+                        `;
+
+                        var INSERT_INTO_ADRESS_QUERY = `
+                        INSERT INTO "Adress"(city, street) VALUES(($1), ($2))
+                        `;
+
+                        var INSERT_NEW_ADRESS_QUERY = `
+                        UPDATE "User" SET adress = ($1) WHERE username = ($2)`; 
+
+                        var SELECT_ADRESS_ID_QUERY = 
+                        `
+                        SELECT id, street FROM "Adress" WHERE street = ($1)
+                        `;
+                        console.log("Вывод нового адреса: " + uniqueItems[0]);
+
+                        USER_CITY_ID = await database.query(SELECT_USER_CITY_ID_QUERY, [username]); // взятие нынешнего айди города клиента
+                        await database.query(INSERT_INTO_ADRESS_QUERY, [USER_CITY_ID.rows[0].id, uniqueItems[0]]); // вставка этого города в адрес и вставка улицы в адрес
+                        SELECT_ADRESS = await database.query(SELECT_ADRESS_ID_QUERY, [uniqueItems[0]]);
+
+                        await database.query(INSERT_NEW_ADRESS_QUERY, [SELECT_ADRESS.rows[0].id, username]); 
+
+                        await bot.sendMessage(id, `Ваш новый адрес <i>${SELECT_ADRESS.rows[0].street}</i> уже в системе!`, {
+                            parse_mode: "HTML"
+                        });
+                        //await database.end();
+                    }
+                    catch(ex) {
+                        console.log('Что-то произошло- ' + ex);
+                    }
+                    finally {
+                        await database.end()
+                    }
+                }
+                await inputNewAdress(array2, uniqueItems2, username);
+            break;
+
+
         }
     }
     catch(ex) {
@@ -124,7 +213,7 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
     }
 
     finally {
-
+        // await database.end()
     }
 }
 

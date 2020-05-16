@@ -269,7 +269,7 @@ TEXT = `
             });
             if(dish_name2.rows[0] != null) {
                 TEXT = `
-<b>${first_name}</b>, <i>давайте бороться с жаждой вместе?
+<b>${first_name}</b>, <i>давайте бороться с жаждой вместе?</i>
 
 <strong>Заказывайте, будет вкусно! \uD83D\uDE4C </strong>`;
                 await bot.sendDocument(id, "img/water.gif", {
