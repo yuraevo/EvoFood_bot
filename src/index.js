@@ -8,6 +8,8 @@ const personal_card_user = require("./functions/personal_card_user");
 const choise_dish = require("./functions/choiseDish");
 const inline_keyboard_dish_description = require("./functions/inline_keyboard_dish_description");
 const inline_keyboard_add_to_card = require("./functions/inline_keyboard_add_to_card")
+const basket = require("./functions/basket")
+const switch_text = require("./functions/switch_text")
 
 // const token = require("./token")
 // const TOKEN = token.TOKEN
@@ -48,6 +50,13 @@ bot.on("message", msg => {
                     keyboard: keyboards.menu
                 }
             });
+        break;
+
+        case keyboard_text.main.basket:
+            bot.sendChatAction(id, "typing");
+            console.log("Пользователь " + username + " нажал кнопку МОИ ЗАКАЗЫ");
+            basket.show_basket(bot, id, first_name, username);
+
         break;
 
         case keyboard_text.menu.drinks:
@@ -186,4 +195,5 @@ bot.on("callback_query", query => {
     adress.registration(id, data, first_name, last_name, username, bot, query);
     inline_keyboard_dish_description.inline_keyboard_dish_description(id, data, username, bot, query);
     inline_keyboard_add_to_card.inline_keyboard_add_to_card(id, data, username, bot, query);
+    switch_text.switch_text(id, data, first_name, last_name, username, bot, query)
 })

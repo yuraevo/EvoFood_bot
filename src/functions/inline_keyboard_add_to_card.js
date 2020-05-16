@@ -20,10 +20,8 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                 switch(data) {
                     case `К: ` + element.name_dish:
                         bot.answerCallbackQuery(query.id, "Ваш заказ " + element.name_dish + " в корзине");
-
-                        let array = new Array();
-                        let uniqueItems = new Array();
-                        
+                        let array = new Array(); // массив значений
+                        let uniqueItems = new Array(); //массив уникальных значений
                         async function add_to_card(array, uniqueItems) {
                             try {
                                 return await new Promise(async function (resolve) {
@@ -50,7 +48,7 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                                     array.push(adress);
                                                                     uniqueItems = Array.from(new Set(array));
                                                                     console.log("Вводит количества: " + uniqueItems);
-                                                                    insert_into_order_dish(array, uniqueItems, clientID);
+                                                                    insert_into_order_dish(array, uniqueItems, clientID); // вызов второго метода
                                                                 }
                                                             });
                                                             resolve();
@@ -59,9 +57,7 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                 catch(ex) {
                                                     console.log('Что-то произошло - ' + ex);
                                                 }
-                                                finally { 
-                                                
-                                                }
+                                                finally { }
                                             }
 
                                             async function insert_into_order_dish(array, uniqueItems, clientID) {
@@ -69,7 +65,7 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                     database = new Client.Pool(DB);
                                                     await database.connect().then(console.log("Соединение установлено"));;
                                                     var INSERT_INTO_ORDER_DISH_QUERY = `SELECT * 
-                                                                                FROM insert_into_order_dish($1, $2, $3)`; // Функция вставки в order_dish
+                                                                                FROM insert_into_order_dish($1, $2, $3)`; // Функция вставки в самой базе в order_dish
                                                     console.log("Вывод количества: " + uniqueItems[0])
                                                     console.log("Вывод айди клиента: " + clientID)
                                                     await database.query(INSERT_INTO_ORDER_DISH_QUERY, [SELECTED_DISH.rows[0].id, uniqueItems[0], clientID]); //Исполнение функции
@@ -81,15 +77,14 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                     await database.end()
                                                 }
                                             }
-                                            await inputQuantity(array, uniqueItems, SELECTED_CLIENT.rows[0].id)
-                                            //await insert_into_order_dish(array, uniqueItems);
+                                            await inputQuantity(array, uniqueItems, SELECTED_CLIENT.rows[0].id); //вызов метода 
                                     }
                                     resolve()
                                 }
                                 }) 
                             }
                             catch(ex) {
-
+                                console.log('Что-то произошло- ' + ex);
                             }
                             finally {
 
@@ -101,8 +96,8 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
 
                     case `Н: ` + element.name_dish:
                         console.log("Зашло в нет")
-                        console.log(element.category)
-                        choice_dish.choiseDish(bot, id, query.message.chat.first_name, username, element.category);
+                        console.log(element.name)
+                        choice_dish.choiseDish(bot, id, query.message.chat.first_name, username, element.name);
                     break;
                     
                 }
