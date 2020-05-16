@@ -115,35 +115,7 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                         await database.end()
                     }
                 }
-
                 await inputNewPhone(array, uniqueItems, username);
-
-
-
-
-
-
-
-
-
-
-
-
-
-                // await bot.sendMessage(id, "Введите Ваш новый номер телефона: ", {});
-                // await bot.on("message", msg => {
-                //     if(uniqueItems.length < 1) {
-                //         adress = msg.text;
-                //         array.push(adress);
-                //         uniqueItems = Array.from(new Set(array));
-                //         console.log("Вводит новый номер: " + uniqueItems);
-                //     }
-                // });
-                // let QUERY_PUT_NEW_PHONE = `UPDATE "User"
-                // SET phone = ($1)
-                // WHERE username = ($2);`
-                // PUT_NEW_PHONE = await database.query(QUERY_PUT_NEW_PHONE, [uniqueItems[0], username]);
-
             break;
         }
     }
