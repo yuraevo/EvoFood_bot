@@ -4,8 +4,8 @@ const TOKEN = token.TOKEN
 
 const bot = new TelegramBot(TOKEN, {
     polling: {
-        timeout: 1000,
-        interval: 1000,
+        timeout: 2000,
+        interval: 2500,
         autoStart: true
    } 
     // webHook: {

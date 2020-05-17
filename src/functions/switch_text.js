@@ -4,13 +4,15 @@ const registration = require("./userRegistration");
 const keyboard_text = require("../keyboard_text");
 const keyboards = require("../keyboard");
 const text = require("../text");
-const personal_card_user = require("./personal_card_user")
+const personal_card_user = require("./personal_card_user");
+const basket = require("./basket");
 
 async function switch_text(id, data, first_name, last_name, username, bot, query)
 {
     try {
         switch(data) {
             case 'Очистить корзину?':
+                await bot.deleteMessage(id, query.message.message_id);
                 console.log("Зашло в очистить корзину")
                 TEXT = `
 <strong>${first_name}, Вы действительно хотите удалить все содержимое корзины? </strong>`
@@ -20,10 +22,15 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                         inline_keyboard: 
                             [
                                 [{text: "😭 Да", callback_data: `Да, очистить корзину` }],
-                                [{text: "🔙 Нет, назад", callback_data: `Корзина`}]
+                                [{text: "🔙 Нет, назад", callback_data: `Назад в корзину`}]
                             ]
                     }
                 });
+            break;
+
+            case `Назад в корзину`:
+                await bot.deleteMessage(id, query.message.message_id);
+                basket.show_basket(bot, id, first_name, username);
             break;
 
             case `Да, очистить корзину`:
@@ -44,6 +51,7 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
             break;
 
             case 'Изменить телефон?':
+                await bot.deleteMessage(id, query.message.message_id);
                 console.log("Пользователь хочет изменить телефон")
                 TEXT = `
 <strong>${first_name}, Вы действительно хотите изменить телефон? </strong>`
@@ -57,6 +65,11 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                             ]
                     }
                 });
+            break;
+
+            case `Назад в персональный кабинет`:
+                await bot.deleteMessage(id, query.message.message_id);
+                personal_card_user.personalCardUser(id, first_name,last_name,username,bot)
             break;
 
             case 'Да, изменить телефон': 
@@ -112,6 +125,7 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
 
 
             case 'Изменить адрес?':
+                await bot.deleteMessage(id, query.message.message_id);
                 console.log("Пользователь хочет изменить адрес")
                 TEXT = `
 <strong>${first_name}, Вы действительно хотите изменить адрес? </strong>`
@@ -129,7 +143,8 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
              
 
             case 'Да, изменить адрес': 
-                await bot.deleteMessage(id, query.message.message_id);
+            await bot.deleteMessage(id, query.message.message_id);
+                //await bot.deleteMessage(id, query.message.message_id);
                 let array2 = new Array(); // массив значений
                 let uniqueItems2 = new Array(); //массив уникальных значений
                 async function inputNewAdress(array2, uniqueItems2, username) {
@@ -205,6 +220,33 @@ async function switch_text(id, data, first_name, last_name, username, bot, query
                 await inputNewAdress(array2, uniqueItems2, username);
             break;
 
+            case `Пригласить друзей?`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
+
+            case `Получить бонусы?`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
+
+            case `Доставка домой?`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
+
+            case `Забрать из заведения?`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
+
+            case `Забронировать заказ и столик?`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
+
+            case `1`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
+
+            case `Поддержка`:
+                bot.answerCallbackQuery(query.id, `${first_name}, данная функция скоро станет доступна!`);
+            break;
 
         }
     }

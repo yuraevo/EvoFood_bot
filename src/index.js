@@ -7,10 +7,11 @@ const adress = require("./functions/registration_user");
 const personal_card_user = require("./functions/personal_card_user");
 const choise_dish = require("./functions/choiseDish");
 const inline_keyboard_dish_description = require("./functions/inline_keyboard_dish_description");
-const inline_keyboard_add_to_card = require("./functions/inline_keyboard_add_to_card")
-const basket = require("./functions/basket")
-const switch_text = require("./functions/switch_text")
-
+const inline_keyboard_add_to_card = require("./functions/inline_keyboard_add_to_card");
+const basket = require("./functions/basket");
+const switch_text = require("./functions/switch_text");
+const give_feedback = require("./functions/give_feedback")
+const now = new Date()
 // const token = require("./token")
 // const TOKEN = token.TOKEN
 
@@ -182,6 +183,78 @@ bot.on("message", msg => {
                 }
             });
         break;   
+
+        case keyboard_text.main.reserve_table:
+            bot.sendChatAction(id, "typing")
+            console.log("Пользователь " + username + " нажал кнопку ЗАРЕЗЕРВИРОВАТЬ СТОЛ");
+            bot.sendPhoto(id, "img/zakaz_stola2.jpg", {
+                parse_mode: 'HTML',
+                reply_markup: {
+                    inline_keyboard: 
+                        [
+                            [{text: "📍 Столик 1", callback_data: `1` }, {text: "📍 Столик 2", callback_data: `1` }],
+                            [{text: "📍 Столик 3", callback_data: `1`}, {text: "📍 Столик 4", callback_data: `1` }],
+                            [{text: "📍 Столик 5", callback_data: `1`}, {text: "📍 Столик 6", callback_data: `1` }],
+                            [{text: "📍 Столик 7", callback_data: `1`}, {text: "📍 Столик 8", callback_data: `1` }]
+                        ]
+                },
+                caption: `<strong>🏛️ ${first_name}, вот доступные столики на момент</strong> <i>${now}</i>\n\n(данный раздел находится еще в разработке)`
+            });
+        break; 
+
+        case keyboard_text.main.review:
+            bot.sendChatAction(id, "typing")
+            console.log("Пользователь " + username + " нажал кнопку НАПИСАТЬ ОТЗЫВ");
+            give_feedback.give_feedback(bot, id, first_name, username);
+        break;   
+
+        case keyboard_text.main.about:
+            //bot.deleteMessage(id, msg.chat.message_id),
+            bot.sendChatAction(id, "typing")
+            console.log("Пользователь " + username + " нажал кнопку О ЗАВЕДЕНИИ");
+            bot.sendMessage(id, "Выберите интересующие вас категории ", {
+                parse_mode: "Markdown",
+                reply_markup: {
+                    keyboard: keyboards.about
+                }
+            });
+        break;
+
+        case keyboard_text.about.telephone_number: 
+            bot.sendContact(id, "380949520689", "EvoFood | 🍵Вкусный бот");
+            bot.sendMessage(id, `<strong>Звоните в любое время дня и ночи. Ночью мы Вас тоже любим!</strong>`, {
+                parse_mode: "HTML"
+            })
+        break;
+
+        case keyboard_text.about.adress: 
+            bot.sendMessage(id, `❤️ <strong>Мы Вас ждем, ${first_name}! Вы можете проложить маршрут прямо тут!</strong>\n\n🙌Скажите нам на месте, что Вы от 🍵Вкусного бота и Вас ждет приятное удивление`, {
+                parse_mode: "HTML"
+            })
+            bot.sendLocation(id, 46.491471, 30.747098)
+        break;
+
+        case keyboard_text.about.staff: 
+            bot.sendMessage(id, "Вы скоро увидите наших классных ребят, следите за новостями🔔", {})
+        break;
+
+        case keyboard_text.about.interior: 
+            bot.sendMessage(id, `<strong>${first_name}, добро пожаловать туда, где всегда вкусно и атмосферно!</strong> \n\nhttps://telegra.ph/Interer-nashego-zavedeniya-11-09`, {
+                parse_mode: "HTML"
+            })
+        break;
+
+        case keyboard_text.personal_accaunt.bonus: 
+            bot.sendMessage(id, `<strong>${first_name}, с помощью бонусов Вы можете накапливать баллы и рассчитываться ими в нашем заведении. \n\nТакже, за каждый заказ, Вам начисляются бонусы. \n\nЗа приглашенного друга в наш бот Вы тоже получите бонусы. \n\nСледите за новостями. Раздел находится еще в разработке. </strong>`, {
+                parse_mode: "HTML"
+            })
+        break;
+
+        case keyboard_text.main.inviting_friends: 
+            bot.sendMessage(id, `<strong>${first_name}, с помощью бонусов Вы можете накапливать баллы и рассчитываться ими в нашем заведении. \n\nТакже, за каждый заказ, Вам начисляются бонусы. \n\nЗа приглашенного друга в наш бот Вы тоже получите бонусы. \n\nСледите за новостями. Раздел находится еще в разработке. </strong>`, {
+                parse_mode: "HTML"
+            })
+        break;
     }
 })
 

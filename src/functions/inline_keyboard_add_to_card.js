@@ -73,17 +73,18 @@ async function inline_keyboard_add_to_card(id, data, username, bot, query) {
                                                     await database.query(INSERT_INTO_ORDER_DISH_QUERY, [SELECTED_DISH.rows[0].id, uniqueItems[0], clientID]); //Исполнение функции
                                                     await bot.sendMessage(id, `Ваш заказ <i>${SELECTED_DISH.rows[0].name_dish}(x${uniqueItems[0]})</i> в корзине!`, {
                                                         parse_mode: "HTML",
-                                                        reply_markup: {
-                                                            inline_keyboard: 
-                                                                [
-                                                                    [{text: "Зайти в корзину", callback_data: `Корзина` }],
-                                                                    [{text: "🔙 Назад ", callback_data: `Корзина`}]
-                                                                ]
-                                                        }
+                                                        // reply_markup: {
+                                                        //     inline_keyboard: 
+                                                        //         [
+                                                        //             [{text: "Зайти в корзину", callback_data: `Корзина` }],
+                                                        //             [{text: "🔙 Назад ", callback_data: `Корзина`}]
+                                                        //         ]
+                                                        // }
                                                     })
                                                 }
                                                 catch(ex) {
                                                     console.log('Что-то произошло- ' + ex);
+                                                    await bot.sendMessage(id, "Походу вы ввели значение, которое не подходит для количества, попробуйте еще раз🧐")
                                                 }
                                                 finally {
                                                     await database.end()

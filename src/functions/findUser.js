@@ -13,11 +13,12 @@ async function findUser(id, first_name, last_name, username, bot, msg) {
         user = await database.query(queryUser, [username]); //запрос юзера в базе
         console.table(user.rows); //вывод юзера
         if(user.rows[0] != null) { //если есть, добро пожаловать
-            bot.sendMessage(id, "Добро пожаловать, " + user.rows[0].first_name + "!", {
-                parse_mode: "Markdown",
+            bot.sendDocument(id, "img/privet.gif", {
+                parse_mode: "HTML",
                 reply_markup: {
                     keyboard: keyboards.personal_accaunt
-                }
+                },
+                caption: `<strong>🍳Добро пожаловать, ${user.rows[0].first_name} 🧡</strong> \n\nРады ощущать отклик Ваших пальцев на экране! Выберите, что Вас интересует!`
             });
         }
         else {      

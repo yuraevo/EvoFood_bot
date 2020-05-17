@@ -21,11 +21,12 @@ async function show_basket(bot, id, first_name, username)
                             JOIN "User" ON "User".id = "Client".user
                         WHERE "User".username = ($1)`;  //поиск в базе
 
-        var BASKET_USER_ALL_PRICE_QUERY = `SELECT SUM("Order_Dish".cost) AS all_cost 
-        FROM "Order_Dish" JOIN "Dish" ON "Dish".id = "Order_Dish".dish
-        JOIN "Client" ON "Client".id = "Order_Dish".client
-        JOIN "User" ON "User".id = "Client".user
-        WHERE "User".username = ($1)`;  //поиск в базе
+        var BASKET_USER_ALL_PRICE_QUERY = `
+            SELECT SUM("Order_Dish".cost) AS all_cost 
+            FROM "Order_Dish" JOIN "Dish" ON "Dish".id = "Order_Dish".dish
+                JOIN "Client" ON "Client".id = "Order_Dish".client
+                JOIN "User" ON "User".id = "Client".user
+            WHERE "User".username = ($1)`;  //поиск в базе
 
         BASKET_USER = await database.query(BASKET_USER_QUERY, [username]); //запрос корзины юзера в базе
         BASKET_USER_ALL_PRICE = await database.query(BASKET_USER_ALL_PRICE_QUERY, [username]); //запрос корзины юзера в базе
@@ -44,18 +45,19 @@ async function show_basket(bot, id, first_name, username)
                 reply_markup: {
                     inline_keyboard: 
                         [
-                            [{text: "\uD83D\uDEF5 Доставка на дом(по адресу)", callback_data: `Доставка домой` }],
-                            [{text: "\uD83C\uDFDB Забрать из заведения", callback_data: `Забрать из заведения`}],
-                            [{text: "\uD83D\uDCF2 Забронировать заказ и столик", callback_data: `Забрать из заведения`}],
+                            [{text: "\uD83D\uDEF5 Доставка на дом(по адресу)", callback_data: `Доставка домой?` }],
+                            [{text: "\uD83C\uDFDB Забрать из заведения", callback_data: `Забрать из заведения?`}],
+                            [{text: "\uD83D\uDCF2 Забронировать заказ и столик", callback_data: `Забронировать заказ и столик?`}],
                             [{text: "🧹 Очистить корзину", callback_data: `Очистить корзину?`}]
                         ]
                 }
             })
         }
         else {
-            TEXT = `<strong>${first_name}, Ваш список заказов пуст </strong> 
+            TEXT = `<strong>${first_name}, Ваш список заказов пуст 🗑 </strong> 
             
 У нас большой выбор вкусных блюд🍝 
+
 Переходите в меню👇`
             await bot.sendDocument(id, "img/travolta4.gif", {
                 parse_mode: "HTML",

@@ -16,8 +16,8 @@ dt.format('m/d/y H:M');
 async function registration(id, data, first_name, last_name, username, bot, query) {
     try {
         database = new Client.Pool(DB);
-        await bot.sendChatAction(id, "typing");
-        await bot.deleteMessage(id, query.message.message_id);
+        // await bot.sendChatAction(id, "typing");
+        // await bot.deleteMessage(id, query.message.message_id);
         var QUERY_ALL_COUNTRY = `SELECT id, name_country FROM public."Country"`; // все страны
         var QUERY_ALL_CITY = `SELECT id, name_city, flag FROM public."City"`; // все города
         ALL_COUNTRY = await database.query(QUERY_ALL_COUNTRY); // запрос на все страны
@@ -25,6 +25,8 @@ async function registration(id, data, first_name, last_name, username, bot, quer
         for (const iterator of ALL_COUNTRY.rows) {
             switch(data) {
                 case `Выб. страна: ` + iterator.name_country:
+                    await bot.sendChatAction(id, "typing");
+                    await bot.deleteMessage(id, query.message.message_id);
                     await bot.answerCallbackQuery(query.id, "Вы выбрали страну " + iterator.name_country);
                     console.log("Выбранная страна: " + iterator.name_country);
 
@@ -63,6 +65,8 @@ async function registration(id, data, first_name, last_name, username, bot, quer
             switch(data) {
                 case `Выб. гор: ` + iterator.name_city:
                     await database.end();
+                    await bot.sendChatAction(id, "typing");
+                    await bot.deleteMessage(id, query.message.message_id);
                     await bot.answerCallbackQuery(query.id, "Вы выбрали город " + iterator.name_city);
 
                     let array = new Array();
@@ -185,6 +189,7 @@ async function registration(id, data, first_name, last_name, username, bot, quer
         switch(data) {
             case "Выб. гор: Назад":
                 await database.end();
+                await bot.sendChatAction(id, "typing");
                 await bot.answerCallbackQuery(query.id, "Вы вернулись назад");
                 await choise_country.findUser(id, first_name, last_name, username, bot);
             break;
